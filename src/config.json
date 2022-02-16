@@ -1,0 +1,30 @@
+{
+  "bash": {
+    "color": [
+      [255,0,0],
+      [255,189,0],
+      [43,201,101],
+      [0,100,255],
+      [234,51,88]
+    ]
+  },
+  "link": {
+    "chain": [
+      "config",
+      "connect",
+      "defs",
+      "done",
+      "go",
+      "print",
+      "render",
+      "self",
+      "start",
+      "sub",
+      "view",
+      "wait"
+    ],
+    "link": [
+
+    ]
+  }
+}
