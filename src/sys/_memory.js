@@ -1,10 +1,6 @@
 module.exports = (function() {
-  // util.data.memory[
-  //
-  // ]
   const memory = new Map();
-
-  const prn = require('./_print');
+  const prn = this.print;
   return new Proxy(
     {
       createdAt: new Date().getTime(),

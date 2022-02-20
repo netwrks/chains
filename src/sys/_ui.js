@@ -1,16 +1,11 @@
-let elem = require('./_elem');
 const uiContainer = new Proxy({
   body: document.querySelector('body'),
-  default: [
-    elem('div',{id:'ntx'},'WEEEE'),
-  ],
+  default: [],
   elems: [],
 },{
   get(...a) {
     let [ui,p,prx] = a;
     switch(p) {
-      case 'build':
-        break;
       case 'clear':
       case 'default':
         while(document.querySelector('body').firstChild) document.querySelector('body').firstChild.remove();
@@ -33,16 +28,6 @@ const uiContainer = new Proxy({
     }
   }
 });
-//
-// exports.clear = function() {
-//
-//   console.log(this);
-//   uiContainer.clear;
-//   const prev = document.querySelector('body').outerHTML;
-//   let pr = new Proxy(document.querySelector('body'),{});
-//   // document.querySelector('body') = ['e','e'];
-//   return uiContainer.default;
-// };
 
 module.exports = {
   clear: () => uiContainer.clear,
