@@ -1,0 +1,247 @@
+{
+  "anchors": {
+    "dev": {
+      "collapse": 0
+    },
+    "desc": "",
+    "id": ["⚓","anchors"],
+    "ver": 0.01,
+    "list": [
+      "anchors()",
+      "add($[STRING:id],$[ARRAY:fn])",
+      "all()",
+      "del($[STRING:id])",
+      "doc()",
+      "get($[STRING:id])"
+  ]},
+  "bruh": {
+    "dev": {
+      "collapse": 1
+    },
+    "desc": "",
+    "id": ["🐢","bruh"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "chain": {
+    "desc": "",
+    "dev": {
+      "collapse": 1
+    },
+    "id": ["⛓️","chain"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "config": {
+    "def": { "id": "link", "msg": "🔗", "type": 2 },
+    "dev": {
+      "collapse": 1
+    },
+    "desc": "",
+    "id": ["🕹️","config"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "docs": {
+    "desc": "",
+    "dev": {
+      "collapse": 1
+    },
+    "id": ["📝","docs"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "dom": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["🎨","dom"],
+    "ver": 0.01,
+    "list": [
+      "clear()",
+      "elem()",
+      "info()"
+  ]},
+  "done": {
+    "desc": "",
+    "dev": {
+      "collapse": 1
+    },
+    "id": ["🔥","done"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "go": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["🟩","go"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "info": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["ℹ️","info"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "isKind": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["❔","isKind"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "link":  {
+    "def": { "id": "link", "msg": "🔗", "type": 2 },
+    "desc": "",
+    "dev": {
+      "collapse": 1
+    },
+    "id": ["🔗","link"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "msg": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["✉️","msg"],
+    "ver": 0.01,
+    "list": [
+      "msg($[STRING: message],$[INTEGER: (0|1|2|3)])"
+  ]},
+  "refresh": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["🔄","refresh"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "render": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["📿","render"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "shortcuts": {
+    "def": {
+      "start": "console.log(x)"
+    },
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["❤️","shortcuts"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "start": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["💃","start"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "store": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["🏪","store"],
+    "ver": 0.01,
+    "list": [
+      "doc()",
+      "render()",
+      "task($[STRING: fn])"
+  ]},
+  "storage": {
+    "def": {
+      "render": [
+
+      ],
+      "store": [
+        { "id": "persist" },
+        { "id": "session" },
+        { "id": "state", "type": "object" }
+      ]
+    },
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["📦","storage"],
+    "ver": 0.01,
+    "list": [
+      "add($[STRING:id],$[ARRAY:fn])",
+      "all()",
+      "del($[STRING:id]",
+      "doc()",
+      "info()",
+      "renders.add($[STRING:id], $[ARRAY:fn])",
+      "renders.all()",
+      "renders.del($[STRING:id])",
+      "renders.get($[STRING:id])",
+      "renders.tla",
+      "🏪",
+      "tla"
+  ]},
+  "test":  {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["🧪","test"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "util": {
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "id": ["⚙️","util"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
+  "view":  {
+    "id": ["🪟","view"],
+    "desc": "",
+    "dev": {
+      "collapse": 0
+    },
+    "ver": 0.01,
+    "list": [
+
+  ]}
+}

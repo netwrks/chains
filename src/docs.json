@@ -1,0 +1,154 @@
+{
+  "dom": {
+    "wrapper": "body"
+  },
+  "sys": {
+    "anchors": {
+      "id": ["⚓","anchors"],
+      "conf": [0,1],
+      "desc": "",
+      "list": [
+        "anchors()",
+        "add($[STRING:id],$[ARRAY:fn])",
+        "all()",
+        "del($[STRING:id])",
+        "doc()",
+        "get($[STRING:id])"
+      ]
+    },
+    "bruh": {
+      "id": ["🐢","bruh"],
+      "conf": [0,0],
+      "desc": ""
+    },
+    "config": {
+      "id": ["🕹️","config"],
+      "conf": [0,0],
+      "desc": ""
+    },
+    "docs": {
+      "id": ["📝","docs"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "dom":  {
+      "id": ["🎨","dom"],
+      "conf": [0,1],
+      "desc": "",
+      "list": [
+        "clear()",
+        "elem()",
+        "info()"
+      ]
+    },
+    "done": {
+      "id": ["🔥","done"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "go": {
+      "id": ["🟩","go"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "info": {
+      "id": ["ℹ️","info"],
+      "desc": ""
+    },
+    "isKind": {
+      "id": ["❔","isKind"],
+      "conf": [0,0],
+      "desc": ""
+    },
+    "link":  {
+      "id": ["🔗","link"],
+      "conf": [0,0],
+      "desc": ""
+    },
+    "msg":  {
+      "id": ["✉️","msg"],
+      "conf": [0,0],
+      "desc": "",
+      "list": [
+        "msg($[STRING: message],$[INTEGER: (0|1|2|3|4)])"
+      ]
+    },
+    "print": {
+      "id": ["🖨️","print"],
+      "conf": [0,0],
+      "desc": "",
+      "list": [
+        "print(...$[ARRAY: [$[STRING: msg], $[INTEGER: (0,1,2,3)], $[OBJECT: data]])"
+      ]
+    },
+    "refresh": {
+      "id": ["🔄","refresh"],
+      "conf": [0,0],
+      "desc": ""
+    },
+    "render": {
+      "id": ["📿","render"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "start": {
+      "id": ["🚃","start"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "store": {
+      "id": ["🏪","store"],
+      "conf": [0,1],
+      "desc": "",
+      "list": [
+        "createdAt",
+        "doc()",
+        "render()",
+        "task($[STRING: fn])"
+      ]
+    },
+    "storage": {
+      "id": ["📦","storage"],
+      "conf": [0,1],
+      "desc": "",
+      "list": [
+        "add($[STRING:id],$[ARRAY:fn])",
+        "all()",
+        "del($[STRING:id]",
+        "doc()",
+        "info()",
+        "renders.add($[STRING:id], $[ARRAY:fn])",
+        "renders.all()",
+        "renders.del($[STRING:id])",
+        "renders.get($[STRING:id])",
+        "renders.tla",
+        "🏪",
+        "tla"
+      ]
+    },
+    "test":  {
+      "id": ["🧪","test"],
+      "conf": [0,1],
+      "desc": ""
+    },
+    "view":  {
+      "id": ["🪟","view"],
+      "conf": [0,1],
+      "desc": ""
+    }
+  },
+  "util": {
+    "color": [
+      [255, 0, 0],
+      [255, 189, 0],
+      [43, 201, 101],
+      [0, 100, 255],
+      [234, 51, 88]
+    ],
+    "ic": [
+      
+    ],
+    "ms": 0,
+    "noprint": ["info","prn","msg"]
+  }
+}
