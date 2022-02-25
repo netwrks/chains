@@ -14,6 +14,14 @@
       "doc()",
       "get($[STRING:id])"
   ]},
+  "auth": {
+    "dev": {},
+    "desc": "",
+    "id": [ "👤", "auth"],
+    "ver": 0.01,
+    "list": [
+
+  ]},
   "bruh": {
     "dev": {
       "collapse": 1
