@@ -62,6 +62,7 @@ this.panel = (x) => this._panel(
           conf,
           del: y => delete this.storage[y],
           doc: y => conf.link.list.forEach(y=>this.prnt('storage',` ${y}`,5)),
+          get: x => this.storage[x],
           render: y => this.renders[y],
           renders:{
             add: (x,y) => this.renders[x] = y,
