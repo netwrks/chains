@@ -1,6 +1,6 @@
 Object.setPrototypeOf(this,require('../util'));
 this.add = ({ id, type }, or = {}) => {
-  this.renders[id] = [];
+  // this.renders[id] = [];
   this.storage[id] = new Proxy(this.models[type || id || 'object'], {
     get(...b) {
       console.log(b)
@@ -63,31 +63,9 @@ this.panel = (x) => this._panel(
           del: y => delete this.storage[y],
           doc: y => conf.link.list.forEach(y=>this.prnt('storage',` ${y}`,5)),
           get: x => this.storage[x],
-          render: y => this.renders[y],
-          renders:{
-            add: (x,y) => this.renders[x] = y,
-            all: () => this.renders.all,
-            del: x => delete this.renders[x],
-          }
         }
     };
   },
 );
-this.renders = new Proxy({}, {
-  get(...x) {
-    console.log('THJIS', x)
-    if(x[1] =='all')this.time.updatedAt=new Date().getTime();
-    if(b[0][b[1]]) {
-      b[0][b[1]].map((x, i) => {
-        Function(x)();
-        if (i > b[0][b[1]] - 1) this.time.updatedAt;
-      });
-      return b[0];
-    };
-    return (b[1]!=='all'&&[0][b[1]]) ? b[0][b[1]] : b[0];
-  },
-  set(...c){
-    if(c[0][c[1]])c[0][c[1]].push(c[2]);
-  }});
 this.storage = {};
 this.conf('storage').def.store.map(x=>this.add(x));

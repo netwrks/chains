@@ -1,15 +1,11 @@
 Object.setPrototypeOf(this,require('./link'));
 
 module.exports = this
+  .renders(x => {
+    x.add('test',['alert(true)'])
+  })
   .start()
   .storage(x => {
-    console.log(x);
     x.get('persist').add = ['t',1];
   })
-  .shortcuts(x => {
-    console.log(x.all())
-  })
   .end();
-
-
-console.log(this.storage())
