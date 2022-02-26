@@ -4,6 +4,7 @@ this.data = new Proxy({}, {
   get(d,k,p) {
     if (!d[k] && this.panel) this.panel()._.prnt(0);
     if (k && d[k]) d[k].list.map(y => Function(y)());
+    return d[k] || p;
   },
   set(d,k,t){
     if (k === 'list') d[k].list.push(t[1]);

@@ -2,7 +2,7 @@ Object.setPrototypeOf(this,require('./link'));
 
 module.exports = this
   .renders(x => {
-    x.add('test',['alert(true)'])
+    x.add('test',['alert(true)']);
   })
   .start()
   .storage(x => {

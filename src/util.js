@@ -39,6 +39,6 @@ this._panel = (x, y) => {
   this.timer(0);
   return y({ ...x, createdAt:new Date().getTime(), updatedAt:new Date().getTime() });
 };
-this.prnt = (x, y = null,z = 2) => !!this._config.dev
-  ? console.log(`${this.conf('chain').id[0]}%c${(y && this.conf(y)) ? this.conf(y).id[0] : ( y || '💀')}`, `color:rgb(${this.defaults.color[z]})`)
+this.prnt = (x, y = null,z = 2) => !this._config.dev
+  ? console.log(`${this.conf('chain').id[0]}%c${(y && this.conf(y)) ? this.conf(y).id[0] : (y || '💀')}`, `color:rgb(${this.defaults.color[z]})`)
   : null;
