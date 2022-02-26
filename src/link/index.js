@@ -1,8 +1,19 @@
 Object.setPrototypeOf(this,require('../util'));
+this.anchors = x => this.link('anchors', x);
+this.bruh = () => this.link('bruh', null, () => {
+  this.prnt('bruh',` ${new Date().getTime()}`, 5);
+  this.prnt('bruh', this.config.link.id.join(' '), 2);
+  this.prnt('bruh', `${this.config.link.id[0]} ⏱️${this.timer()[0]}ms`,5);
+});
 this.config = this.config();
 this.config.createdAt = new Date().getTime();
+this.dom = x => this.link('dom', x);
+this.end = x => {
+  this.config.dev && console.log(`${this.conf('chain').id[0]}✂️ 🏁${this.timer()[0]}`);
+  this.timer(0);
+  return this;
+};
 this.link = (x,y,z=null) => {
-
   if (x==='start') this.timer(-1);
   this.config.link = this.conf(x);
   this.config.dev && console[`group${(!!this.config.link.dev.collapse > 0) ? 'Collapsed' : ''}`] (
@@ -18,28 +29,13 @@ this.link = (x,y,z=null) => {
   this.timer(0);
   return this;
 };
-
-this.anchors = x => this.link('anchors', x);
-this.bruh = () => this.link('bruh', null, () => {
-  this.prnt('bruh',` ${new Date().getTime()}`, 5);
-  this.prnt('bruh', this.config.link.id.join(' '), 2);
-  this.prnt('bruh', `${this.config.link.id[0]} ⏱️${this.timer()[0]}ms`,5);
-});
-this.dom = x => this.link('dom', x);
-this.end = x => {
-  this.config.dev && console.log(`${this.conf('chain').id[0]}✂️ 🏁${this.timer()[0]}`);
-  this.timer(0);
-  return this;
-};
+this.renders = x => this.link('renders', x);
+this.shortcuts = x => this.link('shortcuts', x);
 this.start = x => {
   this.config.createdAt = new Date().getTime();
   this.timer(this.config.createdAt - new Date().getTime());
   this.config.dev && console.log(`${this.conf('chain').id[0]}${this.conf('start').id[0]} 🏁${this.timer(0)[0]}`);
-  if (x && Object.isObject(x)) {
-    console.log(x)
-  }
   return this;
 };
 this.storage = x => this.link('storage', x);
 this.test = () => this.end();
-this.shortcuts = x => this.link('shortcuts', x);
