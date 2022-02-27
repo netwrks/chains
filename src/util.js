@@ -29,16 +29,29 @@ this.defaults = {
   ],
 };
 this.timer = (x = 0) => {
-  this.timer.ms = (x<0) ? [0, 0] : [((this.timer.ms[0] || 0) + (this.timer.ms[1] || 0)), (!x ? (this.timer.ms[1] || 0) : x)];
+  this.timer.ms = (x < 0)
+    ? [0, 0]
+    : [
+      ((this.timer.ms[0] || 0) + (this.timer.ms[1] || 0)),
+      (!x ? (this.timer.ms[1] || 0) : x),
+    ];
   return this.timer.ms;
 };
 this.timer.ms = [0,0];
 this.typeof = (x, y) => x ? (typeof x === y) : false;
 this._panel = (x, y) => {
-  this.prnt(x.link.id[1], `${x.link.id[0]} ⏱️${this.timer(x.createdAt - new Date().getTime())[0]}ms`, 5);
+  this.prnt(
+    x.link.id[1],
+    `${x.link.id[0]} ⏱️${this.timer(x.createdAt - new Date().getTime())[0]}ms`,
+    5,
+  );
   this.timer(0);
-  return y({ ...x, createdAt:new Date().getTime(), updatedAt:new Date().getTime() });
+  return y({
+    ...x,
+    createdAt:new Date().getTime(),
+    updatedAt:new Date().getTime(),
+  });
 };
-this.prnt = (x, y = null,z = 2) => !this._config.dev
-  ? console.log(`${this.conf('chain').id[0]}%c${(y && this.conf(y)) ? this.conf(y).id[0] : (y || '💀')}`, `color:rgb(${this.defaults.color[z]})`)
+this.prnt = (x, y = null,z = 2) => !!this._config.dev
+  ? console.log(`${this.conf('chain').id[0]}%c${(y && this.conf(y)) ? this.conf(y).id[0] : (`${y}` || '💀')}`, `color:rgb(${this.defaults.color[z]})`)
   : null;

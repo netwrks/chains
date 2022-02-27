@@ -200,6 +200,13 @@
     },
     "id": ["📦","storage"],
     "ver": 0.01,
+    "link": {
+      "connect": {
+        "desc": "",
+        "id": ["🎛️","storage.connect"],
+        "ver": 0.01
+      }
+    },
     "list": [
       "add($[STRING:id],$[ARRAY:fn])",
       "all()",
@@ -214,6 +221,7 @@
       "🏪",
       "tla"
   ]},
+
   "test":  {
     "desc": "",
     "dev": {
