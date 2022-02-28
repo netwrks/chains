@@ -14,8 +14,8 @@ module.exports = this
   .start()
   .storage(x => {
     let i = 0;
+    this.storage(z => z.addTo('persist', 'test', i));
     // setInterval(() => {
-      this.storage(z => z.addTo('persist', 'test', i));
     //   i++;
     // }, 300);
   })
