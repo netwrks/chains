@@ -1,89 +1,80 @@
 Object.setPrototypeOf(this,require('../util'));
-this.conns = {};
-this.msg = (x, y = 5) => this.prnt('storage',x,y);
-this.add = ({ id, type }, or = {}) => {
-  this.conns[id] = {
-    active: new Map(),
-    connAt: new Date().getTime(),
-    execAt: null,
-  };
-  this.storage[id] = new Proxy(this.models[type || id || 'object'], {
-    get(d, k) {
-      switch(true) {
-        case d === 'exec':
-          // this.tla = new Date().getTime();
-          // this.renders[x.id].map(r => (typeof c[0] === 'string' ? Function(r) : r)(c[0]));
-          alert('yes');
-          break;
-        case !!d[k]:
-          break;
-        default:
-          return d[k];
-    }},
-    set(...c){
-      switch(true) {
-        case(c[1]==='add'):
-          c[0][c[2][0]]=c[2][1];
-          break;
-        case(c[1]==='del'):
-          delete c[0][c[2]];
-          break;
-        case(c[0].set):
-          c[0].set(c[2].id,c[2]);
-          break;
-        case(c[0].setItem):
-          c[0].setItem(c[2].id,c[2]);
-          break;
-        default:
-          break;
-      };
-      if (this.conns && this.conns[id]) this.conns[id].active.forEach((x,y) => {
-        console.log(x,y)
-      });
-    },
-    ...or,
-  });
-};
-this.conn = (id, render = null) => {
-  // if render is missing return err
-  if (!render) return this.msg('⛔');
-  this.conns[id].active.set(render.id, render);
-  this.conns[id].execAt = new Date().getTime();
-  return this.msg(`${this.conf('storage').link.connect.id[0]}👍`);
-};
-this.config = this.config();
-this.models = {
-  memory: new Map(),
-  object: new Object(),
-  persist: localStorage,
-  server: null,
-  session: sessionStorage,
-};
-this.panel = x => this._panel(
-  this.config,
-  conf => {
-    switch(true) {
-      case (x && typeof x === 'integer' && x > 0):
-      console.log('s')
-        return {
-          conn: (x,y) => this.conn(x,y),
-          doc: y => conf.link.list.forEach(y=>this.msg(y)),
-          exec: x => this.renders[x].all,
-          task: (x,y) => this.renders[x] = y,
-        };
-      default:
-        return {
-          add: this.add,
-          all: y => this.storage,
-          conf,
-          del: y => delete this.storage[y],
-          doc: y => conf.link.list.forEach(y=>this.msg(y)),
-          get: x => this.storage[x],
-          inf: x => console.log(this),
-        }
+let
+  config = this.config('storage'),
+  conn = {},
+  data = {},
+  models = { object: new Object(), persist: localStorage, session: sessionStorage },
+  render = (id, val) => {
+
+    console.log(conn, id, val)
+    prnt(
+      conn[id] ? ` rendering ${id}` : ` ${id} is not a valid render`,
+      conn[id] ? 2 : 0,
+    );
+    if (conn[id]) {
+      conn[id].tasks.map(task => {
+        Function(task)(val);
+      })
     };
   },
-);
-this.storage = {};
-this.render = x => (x && this.conns) ? this.conns[id].active.forEach(x=> console.log(x)) : this.msg('💾❓')
-this.conf('storage').def.store.map(x=>this.add(x));
+  prnt = (x, y = 5) => this.prnt(config.link, x, y);
+
+let cont = (id, type) => new Proxy(models[type || id ||'object'], {
+  apply() { prnt(' storage:20 > apply storage method', 2); },
+  deleteProperty() { prnt(' storage:24 > deleting a storage container', 2); },
+  get(inner, key, proxy) {
+    prnt(` getting storage container ${key}`, 3);
+    return key === 'all' ? inner : inner[key];
+  },
+  set(inner, key, value, proxy) {
+    switch (true) {
+      case inner.set:
+        prnt(' adding item to map', 2);
+        inner.set(key, value);
+        break;
+      case inner.setItem:
+        prnt(' adding item to Storage', 2);
+        inner.setItem(key, value);
+        break;
+      case !inner[key]:
+      case inner[key]:
+        inner[key] = value;
+        break;
+      default:
+        prnt(' adding item to object', 2);
+        inner[key] = value;
+        break;
+    }
+    if (key && value && inner[key]) {
+      prnt(' rerendering storage connection', 2);
+      render('persist', inner[key]);
+    }
+    prnt(' waiting...')
+    return this;
+  }
+});
+
+['persist','session'].map(x => data[x] = cont(x));
+
+module.exports = this.panel(config, data, {
+  add: (id, type) => {
+    prnt(` adding ${id} container to storage`, 2);
+    conn[id] = new Map();
+    data[id] = cont(type || id);
+    return this;
+  },
+  addTo: (id, key, val) => {
+    data[id][key] = val;
+  },
+  conn: (id, rend) => {
+    prnt(` making a new connection`, 2);
+    if (!conn[id]) conn[id] = rend;
+    if (!rend) return prnt(` ${id} 💔 ${rend.id}`);
+    prnt(` ${id} 💖 ${rend.id}`, 2);
+    // render(id)
+    return conn[id];
+  },
+  conns: () => conn,
+  exec: (id) => data[id].exec,
+  get: id => data[id]
+});

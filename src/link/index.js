@@ -5,23 +5,20 @@ this.bruh = () => this.link('bruh', null, () => {
   this.prnt('bruh', this.config.link.id.join(' '), 2);
   this.prnt('bruh', `${this.config.link.id[0]} ⏱️${this.timer()[0]}ms`,5);
 });
-this.config = this.config();
-this.config.createdAt = new Date().getTime();
 this.dom = x => this.link('dom', x);
 this.end = x => {
   this.config.dev && console.log(`${this.conf('chain').id[0]}✂️ 🏁${this.timer()[0]}`);
   this.timer(0);
   return this;
 };
-this.link = (x,y,z=null) => {
-  if (x==='start') this.timer(-1);
-  this.config.link = this.conf(x);
+this.link = (x, y, z=null) => {
+  if (x === 'start') this.timer(-1);
   this.config.dev && console[`group${(!!this.config.link.dev.collapse > 0) ? 'Collapsed' : ''}`] (
     `${this.conf('chain').id[0]}${this.config.link.id[0]}%c 🏁${this.timer()[0]} ⏱️${this.timer()[1]}`,
     `color: rgba(${this.defaults.color[5]});`,
   );
   if (typeof y === 'function') {
-    y.call(this,require(`./${x}`).panel());
+    y.call(this,require(`./${x}`));
     this.config.updatedAt = new Date().getTime();
     this.timer(this.config.updatedAt-this.config.createdAt);
   };

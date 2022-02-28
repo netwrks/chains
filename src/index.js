@@ -1,17 +1,22 @@
 Object.setPrototypeOf(this,require('./link'));
 
 module.exports = this
-  .renders(({ add, all, conn, end, get, utl }) => {
-    add('test',['alert(true)']);
-    console.log(all())
-    // utl.storage(1).conn('persist',get('test'));
-    // utl.storage(1).exec('persist');
-    end();
+  .renders((x) => {
+    // storage link
+    x.add(
+      'test', // set new render task
+      [`Chain.storage(x=>console.log(x.get('persist').test))`], // add 1 task
+    );
+    this.storage(y => {
+      y.conn('persist', x.get('test'));
+    });
   })
   .start()
-  .storage(({ get }) => {
-    get('persist').add = ['t',1];
-    console.log(get('persist'))
-    get('persist').exec;
+  .storage(x => {
+    let i = 0;
+    // setInterval(() => {
+      this.storage(z => z.addTo('persist', 'test', i));
+    //   i++;
+    // }, 300);
   })
   .end();
