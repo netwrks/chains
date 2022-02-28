@@ -1,10 +1,8 @@
 {
   "anchors": {
-    "dev": {
-      "collapse": 0
-    },
     "desc": "",
-    "id": ["⚓","anchors"],
+    "ic": "⚓",
+    "id": "anchors",
     "ver": 0.01,
     "list": [
       "anchors()",
@@ -13,192 +11,127 @@
       "del($[STRING:id])",
       "doc()",
       "get($[STRING:id])"
-  ]},
+    ]
+  },
   "bruh": {
-    "dev": {
-      "collapse": 1
-    },
     "desc": "",
-    "id": ["🐢","bruh"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🐢",
+    "id": "bruh",
+    "ver": 0.01
+  },
   "chain": {
     "desc": "",
-    "dev": {
-      "collapse": 1
-    },
-    "id": ["⛓️","chain"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "⛓️",
+    "id": "chain",
+    "ver": 0.01
+  },
   "config": {
     "def": { "id": "link", "msg": "🔗", "type": 2 },
-    "dev": {
-      "collapse": 1
-    },
     "desc": "",
-    "id": ["🕹️","config"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🕹️",
+    "id": "config",
+    "ver": 0.01
+  },
   "docs": {
     "desc": "",
-    "dev": {
-      "collapse": 1
-    },
-    "id": ["📝","docs"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "📝",
+    "id": "docs",
+    "ver": 0.01
+  },
   "dom": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["🎨","dom"],
+    "id": "🎨",
+    "id": "dom",
     "ver": 0.01,
     "list": [
       "clear()",
       "elem()",
       "info()"
-  ]},
+    ]
+  },
   "done": {
     "desc": "",
-    "dev": {
-      "collapse": 1
-    },
-    "id": ["🔥","done"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🔥",
+    "id": "done",
+    "ver": 0.01
+  },
   "go": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["🟩","go"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🟩",
+    "id": "go",
+    "ver": 0.01
+  },
   "info": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["ℹ️","info"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "ℹ️",
+    "id": "info",
+    "ver": 0.01
+  },
   "isKind": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["❔","isKind"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "❔",
+    "id": "isKind",
+    "ver": 0.01
+  },
   "link":  {
-    "def": { "id": "link", "msg": "🔗", "type": 2 },
     "desc": "",
-    "dev": {
-      "collapse": 1
-    },
-    "id": ["🔗","link"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🔗",
+    "id": "link",
+    "ver": 0.01
+  },
   "msg": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["✉️","msg"],
+    "ic": "✉️",
+    "id": "msg",
     "ver": 0.01,
     "list": [
       "msg($[STRING: message],$[INTEGER: (0|1|2|3)])"
-  ]},
+    ]
+  },
   "refresh": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["🔄","refresh"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "🔄",
+    "id": "refresh",
+    "ver": 0.01
+  },
   "renders": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["📿","renders"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "📿",
+    "id": "renders",
+    "ver": 0.01
+  },
   "shortcuts": {
-    "def": {
-      "start": "console.log(x)"
-    },
+    "def": { "start": "console.log(x)" },
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["❤️","shortcuts"],
+    "ic": "❤️",
+    "id": "shortcuts",
     "ver": 0.01,
     "list": [
       "doc()"
-  ]},
+    ]
+  },
   "start": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["💃","start"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "💃",
+    "id": "start",
+    "ver": 0.01
+  },
   "store": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["🏪","store"],
+    "ic": "🏪",
+    "id": "store",
     "ver": 0.01,
     "list": [
       "doc()",
       "render()",
       "task($[STRING: fn])"
-  ]},
+    ]
+  },
   "storage": {
-    "def": {
-      "render": [
-
-      ],
-      "store": [
-        { "id": "persist" },
-        { "id": "session" },
-        { "id": "state", "type": "object" }
-      ]
-    },
+    "def": { "render": [], "store": [{ "id": "persist" }, { "id": "session" }, { "id": "state", "type": "object" }] },
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["📦","storage"],
+    "ic": "📦",
+    "id": "storage",
     "ver": 0.01,
     "list": [
       "add($[STRING:id],$[ARRAY:fn])",
@@ -213,35 +146,27 @@
       "renders.tla",
       "🏪",
       "tla"
-  ]},
+    ]
+  },
   "test":  {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["🧪","test"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "id": "🧪",
+    "id": "test",
+    "ver": 0.01
+  },
   "util": {
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
-    "id": ["⚙️","util"],
-    "ver": 0.01,
-    "list": [
-
-  ]},
+    "ic": "⚙️",
+    "id": "util",
+    "ver": 0.01
+  },
   "view":  {
-    "id": ["🪟","view"],
     "desc": "",
-    "dev": {
-      "collapse": 0
-    },
+    "id": "🪟",
+    "id": "view",
     "ver": 0.01,
     "list": [
 
-  ]}
+    ]
+  }
 }

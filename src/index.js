@@ -1,11 +1,22 @@
 Object.setPrototypeOf(this,require('./link'));
 
 module.exports = this
-  .renders(x => {
-    x.add('test',['alert(true)']);
+  .renders((x) => {
+    // storage link
+    x.add(
+      'test', // set new render task
+      [`Chain.storage(x=>console.log(x.get('persist').test))`], // add 1 task
+    );
+    this.storage(y => {
+      y.conn('persist', x.get('test'));
+    });
   })
   .start()
   .storage(x => {
-    x.get('persist').add = ['t',1];
+    let i = 0;
+    this.storage(z => z.addTo('persist', 'test', i));
+    // setInterval(() => {
+    //   i++;
+    // }, 300);
   })
   .end();
