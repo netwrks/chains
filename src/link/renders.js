@@ -1,7 +1,7 @@
 Object.setPrototypeOf(this,require('../util'));
 let
-  config = this.config('renders'),
-  prnt = (x, y = 5) => this.prnt(config.link, x, y);
+  config = this.util.config('renders'),
+  prnt = (x, y = 5) => this.util.prnt(config.link, x, y);
 
 let data = new Proxy({}, {
     get(inner, key, proxy) {
@@ -36,5 +36,6 @@ let data = new Proxy({}, {
 module.exports = this.panel(config, data, {
   add: (id, type) => {
     data[id] = type;
+
   }
 });

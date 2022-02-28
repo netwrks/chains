@@ -1,6 +1,7 @@
 Object.setPrototypeOf(this,require('../util'));
+
 let
-  config = this.config('storage'),
+  config = this.util.config('storage'),
   conn = {},
   data = {},
   models = { object: new Object(), persist: localStorage, session: sessionStorage },
@@ -17,7 +18,7 @@ let
       })
     };
   },
-  prnt = (x, y = 5) => this.prnt(config.link, x, y);
+  prnt = (x, y = 5) => this.util.prnt(config.link, x, y);
 
 let cont = (id, type) => new Proxy(models[type || id ||'object'], {
   apply() { prnt(' storage:20 > apply storage method', 2); },

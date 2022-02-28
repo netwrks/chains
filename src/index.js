@@ -1,22 +1,10 @@
-Object.setPrototypeOf(this,require('./link'));
+let chain = require('./util').start();
 
-module.exports = this
-  .renders((x) => {
-    // storage link
-    x.add(
-      'test', // set new render task
-      [`Chain.storage(x=>console.log(x.get('persist').test))`], // add 1 task
+module.exports = chain
+  .renders(({ add, get }) => {
+    add(
+      'test',
+      [`Chain.storage(x=>console.log(x.get('persist').test))`],
     );
-    this.storage(y => {
-      y.conn('persist', x.get('test'));
-    });
+    chain.storage(y => y.conn('persist', get('test')));
   })
-  .start()
-  .storage(x => {
-    let i = 0;
-    this.storage(z => z.addTo('persist', 'test', i));
-    // setInterval(() => {
-    //   i++;
-    // }, 300);
-  })
-  .end();

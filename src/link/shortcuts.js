@@ -1,4 +1,4 @@
-Object.setPrototypeOf(this,require('./'));
+Object.setPrototypeOf(this,require('../util'));
 console.log(this)
 this.config.createdAt = new Date().getTime();
 this.config.updatedAt = this.config.createdAt;
@@ -7,7 +7,7 @@ this.data = {
     if (this[x]) return this[x].doc();
     this.prnt('👎',0);
   },
-  start: () => require('./'),
+  start: () => this.start,
   storage: () => require('./storage'),
 };
 this.panel = () => this._panel(
@@ -18,6 +18,6 @@ this.panel = () => this._panel(
     conf,
     del: y => delete this.data[y],
     doc: y => conf.link.list.forEach(z => this.prnt('shortcuts', `${(y!=='shortcuts')?'📔':''} ${z}`, 5)),
-    get: y => this.data[y].bind(require('./')),
+    get: y => this.data[y],
   })
 );
