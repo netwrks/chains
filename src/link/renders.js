@@ -40,5 +40,17 @@ module.exports = this.panel(
   data,
   {
     add: (id, type) => data[id] = type,
+    run: (id, val) => {
+      console.log(data, id, val)
+      prnt(
+        data[id] ? ` rendering ${id}` : ` ${id} is not a valid render`,
+        data[id] ? 2 : 0,
+      );
+      if (data[id]) {
+        data[id].tasks.map(task => {
+          Function(task)(val);
+        })
+      };
+    },
   },
 );

@@ -1,11 +1,13 @@
 Object.setPrototypeOf(this,require('../util'));
 let
   config = this.util.config('renders'),
+  body = document.querySelector('body'),
   el = (t = 'div', a = {}, data = null) => {
     const el = document.createElement(t);
     Object.keys(a).filter(x => x !== 'icon').map(k => el.setAttribute(k, a[k]));
     if (t.cont) el.innerHTML += t.cont;
     el.innerHTML += data;
+    body.appendChild(el);
     return el;
   },
   elems = {},
@@ -19,7 +21,7 @@ let
   title = x => document.title = x,
   win = window;
 
-let elem = (x) => {
+let elem = (...y) => y.map(x => {
   if (elems[x.id]) return elems[x.id];
   elems[x.id] = new Proxy(el(
     x.type,
@@ -31,10 +33,12 @@ let elem = (x) => {
     x.content || '',
   ), {
     get(inner, key, proxy) {
-      if (key === 'self') return inner;
-      if (key === 'all') return inner;
-      if (!inner[key] && this.panel) this.panel().chn.prnt(0);
-      return inner[key] || proxy;
+      switch(key) {
+        case 'new':
+          return inner;
+        default:
+          return proxy;
+      }
     },
     set(inner, key, value, proxy) {
       switch (true) {
@@ -65,10 +69,9 @@ let elem = (x) => {
           return inner;
       }
     }
-  })
-  document.querySelector('body').appendChild(elems[x.id].self);
+  });
   return document.getElementById(x.id);
-};
+});
 
 config.createdAt = new Date().getTime();
 
@@ -76,9 +79,14 @@ module.exports = this.panel(
   config,
   false,
   {
-    clear: () => document.getElementById('ntx'),
+    clear: () => {
+      body.innerHTML = '';
+      setTimeout(() => {
+        body.appendChild(el('div', { id: 'ntx' }, ''))
+      }, 5000);
+    },
     elem,
-    elems, 
+    elems,
     template,
     title,
   },

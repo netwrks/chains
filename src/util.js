@@ -87,6 +87,7 @@ exports.util = links.util;
   'shortcuts',
   'storage',
   'ui',
+  'watch',
 ].map(x =>
   links[x] = (y,z) => wrapper(x,y,z)
 );

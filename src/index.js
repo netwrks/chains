@@ -1,31 +1,35 @@
 Object.setPrototypeOf(this,require('./util').start());
-
-module.exports = this
+let Chain = this
   .renders(({ add, get }) => {
     add(
       'test',
-      [`Chain.storage(x=>console.log(x.get('persist').test))`],
+      [`console.log('persist')`],
     );
     this.storage(y => y.conn('persist', get('test')));
   })
   .dom(({ clear, elem, elems, title, template }) => {
     clear();
-    // elem should build, watch update and manage each elem in the dom.
-    elem({
-      class: 'app',
-      id: 'app',
-      type: 'div',
-      visible: true,
-    });
-    console.log(elems);
-
-
-
-    let i = 0;
-    // setInterval(() => {
-      title(i);
-      i++;
-    // }, 100)
+    elem(
+      {
+        class: 'app',
+        id: 'app',
+        type: 'div',
+        visible: true,
+      },
+      {
+        class: 'app1',
+        id: 'app1',
+        type: 'div',
+        visible: true,
+      },
+    );
+    title('elems added');
     // console.log(template(el('div', { id: 't' }, 'sweeet')).baseURI = 'https://google.com');
   })
+  .watch(({ elem }) =>
+    elem('app1')
+      .render('test')
+  )
   .done();
+
+  module.exports = Chain;
