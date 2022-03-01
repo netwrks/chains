@@ -12,7 +12,7 @@ let data = new Proxy({}, {
     set(inner, key, value, proxy) {
       switch (true) {
         case key === 'task':
-          prnt(' adding new task to render', 1);
+          prnt(' adding render task', 3);
           Array.isArray(value)
             ? value.map(v => inner[key].tasks.push(v))
             : inner[key].tasks.push(v);
@@ -22,7 +22,9 @@ let data = new Proxy({}, {
           inner[key] = {
             createdAt: new Date().getTime(),
             id: key,
-            tasks: Array.isArray(value) ? value : [value],
+            tasks: Array.isArray(value)
+              ? value
+              : [value],
             updatedAt: null,
           };
           return inner[key];
@@ -33,9 +35,10 @@ let data = new Proxy({}, {
     }
   });
 
-module.exports = this.panel(config, data, {
-  add: (id, type) => {
-    data[id] = type;
-
-  }
-});
+module.exports = this.panel(
+  config,
+  data,
+  {
+    add: (id, type) => data[id] = type,
+  },
+);
