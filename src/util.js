@@ -28,11 +28,13 @@ let
 
 let
   links = {},
-  panel = (config = {}, data = {}, actions = {}, pan = {}) => {
-    let mthds = mthd(data);
+  panel = (config = {}, data, actions = {}, pan = {}) => {
     timer(config.createdAt - new Date().getTime());
     prnt(config.link, `⏱️${t[0]}ms`);
-    Object.keys(mthds).map(x => pan[x] = mthds[x]);
+    if (data) {
+      let mthds = mthd(data);
+      Object.keys(mthds).map(x => pan[x] = mthds[x]);
+    }
     Object.keys(actions).map(x => pan[x] = actions[x]);
     timer(0);
     return pan;
@@ -64,6 +66,7 @@ exports.bruh = () => Link('bruh', null, () => {
   prnt('bruh', `${con['link'].ic} ${con['link'].id}`, 2);
   prnt('bruh', `${con['link'].ic} ⏱️${timer()[0]}ms`,5);
 });
+exports.elems = [];
 exports.end = end;
 exports.links = links;
 exports.panel = panel;
@@ -79,10 +82,12 @@ exports.util = links.util;
 [
   'anchors',
   'dom',
+  'done',
   'renders',
   'shortcuts',
   'storage',
   'ui',
+  'watch',
 ].map(x =>
   links[x] = (y,z) => wrapper(x,y,z)
 );

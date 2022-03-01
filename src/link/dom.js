@@ -1,82 +1,93 @@
 Object.setPrototypeOf(this,require('../util'));
-this.config = this.config();
-this.config.createdAt = new Date().getTime();
-this.panel = (x) => this._panel(
-  this.config,
-  x => ({
-    add: (x,y) => this.anchors[x] = y,
-    all: () => this.anchors.all,
-    conf: () => ({
-      ...this.config,
-      createdAt: new Date().getTime(),
-      updatedAt:new Date().getTime(),
-    }),
-    del: x => this.anchors.del = x,
-    doc: () => this.conf('anchors').list,
-    get: x => this.anchors[x],
-}));
+let
+  config = this.util.config('renders'),
+  body = document.querySelector('body'),
+  el = (t = 'div', a = {}, data = null) => {
+    const el = document.createElement(t);
+    Object.keys(a).filter(x => x !== 'icon').map(k => el.setAttribute(k, a[k]));
+    if (t.cont) el.innerHTML += t.cont;
+    el.innerHTML += data;
+    body.appendChild(el);
+    return el;
+  },
+  elems = {},
+  event = (x, y, z) => x.addEventListener(y, z),
+  find = x => doc.getElementById(x),
+  prnt = (x, y = 5) => this.util.prnt(config.link, x, y),
+  template = (x, y = 'ntx') => document.getElementById(y).replaceChild(
+    x,
+    document.getElementById(y).firstChild,
+  ),
+  title = x => document.title = x,
+  win = window;
 
+let elem = (...y) => y.map(x => {
+  if (elems[x.id]) return elems[x.id];
+  elems[x.id] = new Proxy(el(
+    x.type,
+    {
+      id: x.id,
+      class: x.class,
+      ...x.params&&x.params,
+    },
+    x.content || '',
+  ), {
+    get(inner, key, proxy) {
+      switch(key) {
+        case 'new':
+          return inner;
+        default:
+          return proxy;
+      }
+    },
+    set(inner, key, value, proxy) {
+      switch (true) {
+        case key === 'add':
+          if (inner[key]) return inner[key];
+          inner[key] = value;
+          console.log('tttt', inner);
+          break;
+        case key === 'task':
+          prnt(' adding elem task', 3);
+          Array.isArray(value)
+            ? value.map(v => inner[key].tasks.push(v))
+            : inner[key].tasks.push(v);
+          return inner;
+        case !inner[key]:
+          prnt(` adding elem ${key}`, 1);
+          inner[key] = {
+            createdAt: new Date().getTime(),
+            id: key,
+            tasks: Array.isArray(value)
+              ? value
+              : [value],
+            updatedAt: null,
+          };
+          return inner[key];
+        default:
+          prnt(' nothing', 3);
+          return inner;
+      }
+    }
+  });
+  return document.getElementById(x.id);
+});
 
-// const Dom = new Function();
-// Dom.prototype.store = {
-//   body: document.querySelector('body'),
-//
-// };
-// Dom.prototype.info={
-//   createdAt:new Date().getTime(),
-//   updatedAt:new Date().getTime(),
-//   ...require('../conf').dom,
-// };
-// Dom.prototype.face=new Proxy(Dom.prototype.store,{
-//
-// });
-// //   default: [],
-// //   elems: [],
-// // },{
-// //   get(...a) {
-// //     let [ui,p,prx] = a;
-// //     switch(p) {
-// //       case 'clear':
-// //       case 'default':
-// //         while(document.querySelector('body').firstChild) document.querySelector('body').firstChild.remove();
-// //         ui.default.map(x=>ui.body.appendChild(x));
-// //         break;
-// //       default:
-// //         break;
-// //     };
-// //     return ui.ctrl;
-// //   },
-// //   set(...a) {
-// //     let [ui,p,v,prx] = a;
-// //     switch(p) {
-// //       case 'default':
-// //         if (!ui.default) ui.default = v;
-// //         return ui.default;
-// //       default:
-// //         break;
-// //
-// //     }
-// //   }
-// // });
-//
-// module.exports=function(x,Dp=Dom.prototype){
-//   let
-//     _=this,
-//     ex=function(x=null,y=0){let z=Dp.store[x];_.util.print(z?['🪟👍',2]:['🪟🚫',0]);return (!x)?true:!!z;};
-//   if(Dom.prototype.store){
-//     Dom.prototype.store=_.storage.add('dom','memory');
-//     Dom.prototype.time.updatedAt=new Date().getTime();
-//   };
-//   return x?(typeof x==='function')?x(Dp):Dp.stores[x].list:{
-//     clear: () => Dom.clear,
-//     elem: function() { return }
-//   }
-// };
-// //
-// // module.exports=function(x){
-// //   console.log(this)
-// //   let
-// //     _=this,
-// //     ex=function(x=null,y=0,t=['stores','renders']){let s=Store.prototype[t[y]][x];_.util.print(s?['🏬👍',2]:['🏬🚫',0]);return (!x)?true:!!s;},
-// //     tla=(x=new Date().getTime())=>{Storage.prototype.time.updatedAt=x;};
-// //   return x?(typeof x==='function')?x(Store.prototype):Store.prototype.stores[x].list:{
+config.createdAt = new Date().getTime();
+
+module.exports = this.panel(
+  config,
+  false,
+  {
+    clear: () => {
+      body.innerHTML = '';
+      setTimeout(() => {
+        body.appendChild(el('div', { id: 'ntx' }, ''))
+      }, 5000);
+    },
+    elem,
+    elems,
+    template,
+    title,
+  },
+);
