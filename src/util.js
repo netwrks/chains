@@ -1,4 +1,19 @@
 let
+  attach = (type,filePath) => {
+   switch(type) {
+     case 'css': {
+       if (filePath) {
+         let link = document.createElement('link');
+         link.rel = 'stylesheet';
+         link.type = 'text/css';
+         link.href = filePath;
+         document.querySelector('body').appendChild(link);
+       };
+     }
+     default:
+      return;
+    }
+  },
   c = {
     createdAt: new Date().getTime(),
     dev: window.location.host.includes('localhost'),
@@ -13,6 +28,7 @@ let
     timer(0);
     return x;
   },
+  event = (x) => document.getElementById(x.id).addEventListener(x.type, x.action),
   link = x => require(`./link/${x}`),
   mthd = data => ({
     add: (x, y) => data[x] = y,
@@ -51,8 +67,10 @@ let
   };
 
 links.util = {
+  attach,
   config: id => ({ ...c, link: con[id||'chain'] }),
   end,
+  event,
   link,
   panel,
   prnt,
@@ -91,3 +109,10 @@ exports.util = links.util;
 ].map(x =>
   links[x] = (y,z) => wrapper(x,y,z)
 );
+[
+  'attach',
+].map(x =>
+  links[x] = (y,z) => {
+    links.util[x](y,z);
+    return links;
+});

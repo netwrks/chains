@@ -41,7 +41,6 @@ module.exports = this.panel(
   {
     add: (id, type) => data[id] = type,
     run: (id, val) => {
-      console.log(data, id, val)
       prnt(
         data[id] ? ` rendering ${id}` : ` ${id} is not a valid render`,
         data[id] ? 2 : 0,

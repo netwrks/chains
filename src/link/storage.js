@@ -1,5 +1,4 @@
 Object.setPrototypeOf(this,require('../util'));
-
 let
   config = this.util.config('storage'),
   conn = {},
@@ -76,6 +75,5 @@ module.exports = this.panel(config, data, {
     return conn[id];
   },
   conns: () => conn,
-  exec: (id) => data[id].exec,
   get: id => data[id]
 });
