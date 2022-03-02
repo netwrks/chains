@@ -47,18 +47,15 @@ registers a template within the chain
 #### 🎨.title(*string*)
 modify the browser / browser tab's title.
 ##### how do i use?
+
 ```
 ⛓️.dom(🎨 =>
   🎨.title('really cool new title')
 )
 ```
 
----
-
 ## ⛓️.done()
 ends the chain it's attached to.
-
----
 
 # ⛓️.renders(📿)
 render management
@@ -77,8 +74,6 @@ end injection / close link
 
 #### 📿.run(*render_id*)
 run a render
-
----
 
 # ⛓️.shortcuts(❤️)
 chainlink shortcut management  
@@ -102,8 +97,6 @@ display available documentation on ❤️ in the console
 
 #### ❤️🔙⚙️.get(*shortcut_id*)
 get a shortcut by id
-
----
 
 # ⛓️.storage(📦)
 data management  
@@ -150,8 +143,6 @@ end injection / close link
 #### 📦.get(*container_id*)
 get a storage container by id
 
----
-
 # ⛓️.util
 utility methods
 
@@ -178,12 +169,8 @@ start the chain
 #### ⛓️⚙️.test()
 test the chain
 
----
-
 # ⛓️.watch()
 observation manager
 
 #### ⛓️⚙️.elem(*elem_id*)
 observe an element
-
----
