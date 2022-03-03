@@ -1,5 +1,8 @@
 require('./proc/history');
-let routes = {};
+let
+  appConfig = {},
+  links = {},
+  routes = {};
 
 let
   attach = (...w) => w.map(x => {
@@ -19,6 +22,13 @@ let
           meta.setAttribute(x, content[k][x]);
           document.querySelector('head').appendChild(meta);
         });
+      }
+      case 'script': {
+        let script = document.createElement('script');
+        script.type = 'text/json';
+        script.src = x.src;
+        document.querySelector('head').appendChild(script);
+        break;
       }
       default:
         break;
@@ -57,7 +67,6 @@ let
     routes[x](links)
     return links;
   },
-  links = {},
   panel = (config = {}, data, actions = {}, pan = {}) => {
     timer(config.createdAt - new Date().getTime());
     prnt(config.link, `⏱️${t[0]}ms`);
@@ -97,8 +106,20 @@ let
 
 links.util = {
   app: (x='ntx') => document.getElementById(x),
+  appConfig,
   attach,
   config: id => ({ ...c, link: con[id||'chain'] }),
+  configs: (...x) => {
+    x.map(y => {
+      if (!!y) {
+        appConfig = {
+          ...appConfig,
+          ...y,
+        };
+        console.log(appConfig)
+      }
+    });
+  },
   end,
   event,
   load,
@@ -118,6 +139,7 @@ exports.bruh = () => Link('bruh', null, () => {
   prnt('bruh', `${con['link'].ic} ${con['link'].id}`, 2);
   prnt('bruh', `${con['link'].ic} ⏱️${timer()[0]}ms`,5);
 });
+exports.appConfig = (x) => x ? appConfig[x] : appConfig;
 exports.elems = [];
 exports.end = end;
 exports.isdev = c.dev;
@@ -143,6 +165,7 @@ exports.util = links.util;
 // add util methods as links
 [
   'attach',
+  'configs',
   'load',
   'route',
   'start',
