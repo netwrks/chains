@@ -100,6 +100,12 @@
     "id": "renders",
     "ver": 0.01
   },
+  "route": {
+    "desc": "",
+    "ic": "🌐️",
+    "id": "route",
+    "ver": 0.01
+  },
   "shortcuts": {
     "def": { "start": "console.log(x)" },
     "desc": "",

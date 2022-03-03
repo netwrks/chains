@@ -5,7 +5,7 @@ let
   button = x => {
     if (elems[x.id]) prnt(0);
     let b = elem({
-      class: 'button',
+      class: `button ${x.class}`,
       id: x.id,
       type: 'button',
       visible: true,
@@ -19,8 +19,9 @@ let
         })
       })
     }
-    b.innerHTML = x.label
-
+    if (typeof x.label === 'string') b.innerHTML = x.label
+    if (typeof x.label === 'object') b.appendChild(x.label);
+    return b;
   },
   el = (t = 'div', a = {}, data = null) => {
     const el = document.createElement(t);
@@ -34,6 +35,7 @@ let
   event = (x, y, z) => document.getElementById(x).addEventListener(y, z),
   find = x => doc.getElementById(x),
   prnt = (x, y = 5) => this.util.prnt(config.link, x, y),
+  scrap = (...x) => x.map(y => document.getElementById(y).remove()),
   template = (x, y = 'ntx') => document.getElementById(y).replaceChild(
     x,
     document.getElementById(y).firstChild,
@@ -54,6 +56,7 @@ let elem = (...y) => y.map(x => {
   ), {
     get(inner, key, proxy) {
       switch(key) {
+        case 'get':
         case 'new':
           return inner;
         default:
@@ -65,10 +68,8 @@ let elem = (...y) => y.map(x => {
         case key === 'add':
           if (inner[key]) return inner[key];
           inner[key] = value;
-          console.log('tttt', inner);
           break;
         case key === 'on':
-          console.log(value)
           break;
         case key === 'task':
           prnt(' adding elem task', 3);
@@ -102,15 +103,24 @@ module.exports = this.panel(
   config,
   false,
   {
-    clear: () => {
-      body.innerHTML = '';
-      setTimeout(() => {
-        body.appendChild(el('div', { id: 'ntx' }, ''))
-      }, 5000);
-    },
+    clear: x => Array
+      .from(this.util.app().children)
+      .filter(y => !y.getAttribute('class').includes(x))
+      .map(y => y.remove(),
+    ),
     button,
     elem,
     elems,
+    goto: (x) => {
+      history.push(x);
+      return this.routes[x](this.links);
+    },
+    remove: (...x) => x.map(y => {
+      delete elems[y];
+      document.getElementById(y) && document.getElementById(y).remove();
+      console.log(elems)
+    }),
+    scrap,
     template,
     title,
   },

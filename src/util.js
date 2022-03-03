@@ -1,19 +1,28 @@
+require('./proc/history');
+let routes = {};
+
 let
-  attach = (type,filePath) => {
-   switch(type) {
-     case 'css': {
-       if (filePath) {
-         let link = document.createElement('link');
-         link.rel = 'stylesheet';
-         link.type = 'text/css';
-         link.href = filePath;
-         document.querySelector('body').appendChild(link);
-       };
-     }
-     default:
-      return;
-    }
-  },
+  attach = (...w) => w.map(x => {
+    switch(x.type) {
+      case 'css': {
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = x.href;
+        document.querySelector('head').appendChild(link);
+        break;
+      }
+      case 'meta': {
+        let meta = document.createElement('meta');
+        Object.keys(x).filter(x => x.type).map(y => {
+          console.log()
+          meta.setAttribute(x, content[k][x]);
+          document.querySelector('head').appendChild(meta);
+        });
+      }
+      default:
+        break;
+  }}),
   c = {
     createdAt: new Date().getTime(),
     dev: window.location.host.includes('localhost'),
@@ -26,9 +35,9 @@ let
   end = x => {
     console.groupEnd();
     timer(0);
-    return x;
+    return links;
   },
-  event = (x) => document.getElementById(x.id).addEventListener(x.type, x.action),
+  event = (x) => document.getElementById(x.id) && document.getElementById(x.id).addEventListener(x.type, x.action),
   link = x => require(`./link/${x}`),
   mthd = data => ({
     add: (x, y) => data[x] = y,
@@ -39,10 +48,15 @@ let
     get: x => data[x] || prnt(0),
   }),
   prnt = (x, y, z) => !!c.dev ? console.log(`${con.chain.ic}${x.ic}%c${y ? (con[y] ? con[y].id[0] : y) : '💀'}`, col(z)) : null,
+
   t = [0,0],
   timer = (x = 0) => t = (x < 0) ? [0, 0] : [t[0] + t[1], x || 0];
 
 let
+  load = (x) => {
+    routes[x](links)
+    return links;
+  },
   links = {},
   panel = (config = {}, data, actions = {}, pan = {}) => {
     timer(config.createdAt - new Date().getTime());
@@ -51,10 +65,25 @@ let
       let mthds = mthd(data);
       Object.keys(mthds).map(x => pan[x] = mthds[x]);
     }
+    pan['goto'] = (x,y,z) => {
+      console.log(y)
+      return goto(x);
+    },
     Object.keys(actions).map(x => pan[x] = actions[x]);
     timer(0);
     return pan;
-  };
+  },
+  start = x => {
+    c.createdAt = new Date().getTime();
+    timer(c.createdAt - new Date().getTime());
+    c.dev && console.log(`${con['chain'].ic}${con['start'].ic} 🏁${timer(0)[0]}`);
+    return links;
+  },
+  route = (r, modify) => {
+    prnt(con.route, (r === '/') ? ' /home' : ` ${r}`, 0);
+    routes[r] = modify;
+    return links;
+  },
   wrapper = (x, y, z=null) => {
     if (x === 'start') timer(-1);
     c.dev && console.group(`${con['chain'].ic}${con['link'].ic}%c 🏁${timer()[0]} ⏱️${timer()[1]}`,`color: rgba(100,100,100);`);
@@ -67,13 +96,18 @@ let
   };
 
 links.util = {
+  app: (x='ntx') => document.getElementById(x),
   attach,
   config: id => ({ ...c, link: con[id||'chain'] }),
   end,
   event,
+  load,
   link,
   panel,
   prnt,
+  route,
+  routes,
+  start,
   timer,
   typeof: (x, y) => x ? (typeof x === y) : false,
   wrapper,
@@ -86,17 +120,15 @@ exports.bruh = () => Link('bruh', null, () => {
 });
 exports.elems = [];
 exports.end = end;
+exports.isdev = c.dev;
 exports.links = links;
 exports.panel = panel;
-exports.start = x => {
-  c.createdAt = new Date().getTime();
-  timer(c.createdAt - new Date().getTime());
-  c.dev && console.log(`${con['chain'].ic}${con['start'].ic} 🏁${timer(0)[0]}`);
-  return links;
-};
+exports.routes = routes;
+exports.start = start;
 exports.test = () => this.end();
 exports.util = links.util;
 
+// parse all links with panels
 [
   'anchors',
   'dom',
@@ -106,11 +138,14 @@ exports.util = links.util;
   'storage',
   'ui',
   'watch',
-].map(x =>
-  links[x] = (y,z) => wrapper(x,y,z)
-);
+].map(x => links[x] = (y,z) => wrapper(x,y,z));
+
+// add util methods as links
 [
   'attach',
+  'load',
+  'route',
+  'start',
 ].map(x =>
   links[x] = (y,z) => {
     links.util[x](y,z);
