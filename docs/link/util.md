@@ -1,23 +1,23 @@
-# **⛓️.util(⚙️ =>**
+## **⛓️.util(⚙️ =>**
 -  utility methods
 
-  ## ⚙️ .bruh()
-  - the standard bruh command
+#### ⚙️ .bruh()
+- the standard bruh command
 
-  ## ⚙️.elems()
-  - array of active elements
+#### ⚙️.elems()
+- array of active elements
 
-  ## ⚙️.end()
-  - finish & proceed to next link
+#### ⚙️.end()
+- finish & proceed to next link
 
-  ## ⚙️.links()
-  - object of active chain links
+#### ⚙️.links()
+- object of active chain links
 
-  ## ⚙️.panel()
-  - panel generator
+#### ⚙️.panel()
+- panel generator
 
-  ## ⚙️.start()
-  - start the chain
+#### ⚙️.start()
+- start the chain
 
-  ## ⚙️.test()
-  - test the chain
+#### ⚙️.test()
+- test the chain
