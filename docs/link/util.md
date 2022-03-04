@@ -1,8 +1,8 @@
-## **⛓️.util(⚙️ =>**
+## **⛓️.util(⚙️)**
 -  utility methods
 
 #### ⚙️ .bruh()
-- the standard bruh command
+- for all the bruhs
 
 #### ⚙️.elems()
 - array of active elements
